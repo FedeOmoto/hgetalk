@@ -1,0 +1,18 @@
+EXPORTS
+  hgeCreate
+  hgeSpriteCreateFromTexture
+  hgeSpriteCreateFromSprite
+  hgeSpriteDestroy
+  hgeFontCreate
+  hgeFontDestroy
+  hgeParticleSystemCreateFromFile
+  hgeParticleSystemCreateFromParticleSystemInfo
+  hgeParticleSystemCreateFromParticleSystem
+  hgeParticleSystemDestroy
+  hgeColorRGBCreateFromRGBA
+  hgeColorRGBCreateFromInteger
+  hgeColorRGBCreate
+  hgeColorRGBDestroy
+  hgeDistortionMeshCreateWithColumns
+  hgeDistortionMeshCreateFromDistortionMesh
+  hgeDistortionMeshDestroy
