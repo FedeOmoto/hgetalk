@@ -150,9 +150,9 @@ ExternalStructure subclass: #HGEVertex
 	poolDictionaries: ''
 	classInstanceVariableNames: ''!
 DWORD subclass: #HGEChannel
-	instanceVariableNames: ''
+	instanceVariableNames: 'hge'
 	classVariableNames: ''
-	poolDictionaries: ''
+	poolDictionaries: 'HGEConstants'
 	classInstanceVariableNames: ''!
 DWORD subclass: #HGEHandle
 	instanceVariableNames: 'hge needsToFreeExternalResources'
@@ -3462,6 +3462,159 @@ defineFields
 HGEChannel guid: (GUID fromString: '{1932C934-3B13-4A17-8A39-0896D763E80D}')!
 HGEChannel comment: 'HGEChannel is a wrapper class for the HCHANNEL handle type.'!
 !HGEChannel categoriesForClass!External-Data-Structured! !
+!HGEChannel methodsFor!
+
+basicFree
+	"Private - Free external resources owned by the receiver."
+
+	Transcript
+		show: 'HGEChannel>>basicFree';
+		cr.
+	hge release!
+
+initialize
+	"Private - Initialize the receiver.
+	These objects are finalizable since they reference owned external resources."
+
+	hge := HGELibrary default hgeCreate: HGE_VERSION.
+	self beFinalizable!
+
+isPlaying
+	"Answer whether the receiver is currently playing."
+
+	^hge channelIsPlaying: self!
+
+isSliding
+	"Answer whether the receiver's volume, panning or pitch are sliding."
+
+	^hge channelIsSliding: self!
+
+length
+	"Anwer the total length of the receiver in seconds."
+
+	^hge channelGetLength: self!
+
+needsFree
+	"Private - Answer whether the receiver requires freeing of any external resources."
+
+	^true!
+
+panning: anInteger 
+	"Set the receiver's panning to anInteger (-100 to 100, 0 means center)."
+
+	hge channelSetPanning: self pan: anInteger!
+
+pause
+	"Pause the receiver."
+
+	hge channelPause: self!
+
+pauseAll
+	"Pause all active audio channels."
+
+	hge channelPauseAll!
+
+pitch: aFloat 
+	"Set the receiver's pitch to aFloat (1.0 means default pitch)."
+
+	hge channelSetPitch: self pitch: aFloat!
+
+position
+	"Answer the receiver's position in seconds."
+
+	^hge channelGetPos: self!
+
+position: seconds 
+	"Set the receiver's position to the <Float> argument, seconds."
+
+	hge channelSetPos: self fSeconds: seconds!
+
+resume
+	"Resume the paused receiver."
+
+	hge channelResume: self!
+
+resumeAll
+	"Resume all active audio channels."
+
+	hge channelResumeAll!
+
+slideVolumeTo: anInteger for: seconds 
+	"Slide the receiver's volume for the specified number of seconds."
+
+	hge 
+		channelSlideTo: self
+		time: seconds
+		volume: anInteger
+		pan: -101
+		pitch: -1.0!
+
+slideVolumeTo: volInteger panning: panInteger for: seconds 
+	"Slide the receiver's volume and panning for the specified number of seconds."
+
+	hge 
+		channelSlideTo: self
+		time: seconds
+		volume: volInteger
+		pan: panInteger
+		pitch: -1.0!
+
+slideVolumeTo: volInteger panning: panInteger pitch: aFloat for: seconds 
+	"Slide the receiver's volume, panning and pitch for the specified number of seconds."
+
+	hge 
+		channelSlideTo: self
+		time: seconds
+		volume: volInteger
+		pan: panInteger
+		pitch: aFloat!
+
+slideVolumeTo: anInteger pitch: aFloat for: seconds 
+	"Slide the receiver's volume and pitch for the specified number of seconds."
+
+	hge 
+		channelSlideTo: self
+		time: seconds
+		volume: anInteger
+		pan: -101
+		pitch: aFloat!
+
+stop
+	"Stop the receiver."
+
+	hge channelStop: self!
+
+stopAll
+	"Stop all active audio channels."
+
+	hge channelStopAll!
+
+volume: anInteger 
+	"Set the receiver's volume to anInteger (0 to 100)."
+
+	hge channelSetVolume: self volume: anInteger! !
+!HGEChannel categoriesFor: #basicFree!private!realizing/unrealizing! !
+!HGEChannel categoriesFor: #initialize!initializing!private! !
+!HGEChannel categoriesFor: #isPlaying!public! !
+!HGEChannel categoriesFor: #isSliding!public! !
+!HGEChannel categoriesFor: #length!public! !
+!HGEChannel categoriesFor: #needsFree!private!realizing/unrealizing! !
+!HGEChannel categoriesFor: #panning:!public! !
+!HGEChannel categoriesFor: #pause!public! !
+!HGEChannel categoriesFor: #pauseAll!public! !
+!HGEChannel categoriesFor: #pitch:!public! !
+!HGEChannel categoriesFor: #position!public! !
+!HGEChannel categoriesFor: #position:!public! !
+!HGEChannel categoriesFor: #resume!public! !
+!HGEChannel categoriesFor: #resumeAll!public! !
+!HGEChannel categoriesFor: #slideVolumeTo:for:!public! !
+!HGEChannel categoriesFor: #slideVolumeTo:panning:for:!public! !
+!HGEChannel categoriesFor: #slideVolumeTo:panning:pitch:for:!public! !
+!HGEChannel categoriesFor: #slideVolumeTo:pitch:for:!public! !
+!HGEChannel categoriesFor: #stop!public! !
+!HGEChannel categoriesFor: #stopAll!public! !
+!HGEChannel categoriesFor: #volume:!public! !
+
 !HGEChannel class methodsFor!
 
 new
