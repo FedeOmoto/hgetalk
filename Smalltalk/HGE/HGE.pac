@@ -762,6 +762,158 @@ basicFree
 		cr.
 	self release!
 
+channelGetLength: channel 
+	"Retrieves the total length of a playing channel.
+
+		float Channel_GetLength(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: float 68 HGEChannel>
+	^self invalidCall!
+
+channelGetPos: channel 
+	"Retrieves a playing channel's position.
+
+		float Channel_GetPos(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: float 69 HGEChannel>
+	^self invalidCall!
+
+channelIsPlaying: channel 
+	"Tests if an audio channel is currently playing.
+
+		bool Channel_IsPlaying(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: bool 67 HGEChannel>
+	^self invalidCall!
+
+channelIsSliding: channel 
+	"Tests if a channel parameters are sliding.
+
+		bool Channel_IsSliding(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: bool 72 HGEChannel>
+	^self invalidCall!
+
+channelPause: channel 
+	"Pauses an audio channel.
+
+		void Channel_Pause(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: void 61 HGEChannel>
+	^self invalidCall!
+
+channelPauseAll
+	"Pauses all active audio channels.
+
+		void Channel_PauseAll();"
+
+	<virtual stdcall: void 64>
+	^self invalidCall!
+
+channelResume: channel 
+	"Resumes a paused audio channel.
+
+		void Channel_Resume(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: void 62 HGEChannel>
+	^self invalidCall!
+
+channelResumeAll
+	"Resumes all active audio channels.
+
+		void Channel_ResumeAll();"
+
+	<virtual stdcall: void 65>
+	^self invalidCall!
+
+channelSetPanning: channel pan: pan 
+	"Changes an audio channel panning.
+
+		void Channel_SetPanning(
+			HCHANNEL channel,
+			int pan
+		);"
+
+	<virtual stdcall: void 58 HGEChannel sdword>
+	^self invalidCall!
+
+channelSetPitch: channel pitch: pitch 
+	"Changes an audio channel pitch.
+
+		void Channel_SetPitch(
+			HCHANNEL channel,
+			float pitch
+		);"
+
+	<virtual stdcall: void 60 HGEChannel float>
+	^self invalidCall!
+
+channelSetPos: channel fSeconds: fSeconds 
+	"Skips forwards or backwards in a playing channel.
+
+		void Channel_SetPos(
+			HCHANNEL channel,
+			float fSeconds
+		);"
+
+	<virtual stdcall: void 70 HGEChannel float>
+	^self invalidCall!
+
+channelSetVolume: channel volume: volume 
+	"Changes an audio channel volume.
+
+		void Channel_SetVolume(
+			HCHANNEL channel,
+			int volume
+		);"
+
+	<virtual stdcall: void 59 HGEChannel sdword>
+	^self invalidCall!
+
+channelSlideTo: channel time: time volume: volume pan: pan pitch: pitch 
+	"Starts sliding a channel volume, panning or pitch.
+
+		void Channel_SlideTo(
+			HCHANNEL channel,
+			float time,
+			int volume,
+			int pan = -101,
+			float pitch = -1
+		);"
+
+	<virtual stdcall: void 71 HGEChannel float sdword sdword float>
+	^self invalidCall!
+
+channelStop: channel 
+	"Stops an audio channel.
+
+		void Channel_Stop(
+			HCHANNEL channel
+		);"
+
+	<virtual stdcall: void 63 HGEChannel>
+	^self invalidCall!
+
+channelStopAll
+	"Stops all active audio channels.
+
+		void Channel_StopAll();"
+
+	<virtual stdcall: void 66>
+	^self invalidCall!
+
 effectFree: effect 
 	"Deletes loaded sound effect and frees associated resources.
 
@@ -1183,6 +1335,21 @@ timerGetFPS
 	<virtual stdcall: sdword 38>
 	^self invalidCall! !
 !HGE categoriesFor: #basicFree!private!realizing/unrealizing! !
+!HGE categoriesFor: #channelGetLength:!audio channel!public! !
+!HGE categoriesFor: #channelGetPos:!audio channel!public! !
+!HGE categoriesFor: #channelIsPlaying:!audio channel!public! !
+!HGE categoriesFor: #channelIsSliding:!audio channel!public! !
+!HGE categoriesFor: #channelPause:!audio channel!public! !
+!HGE categoriesFor: #channelPauseAll!audio channel!public! !
+!HGE categoriesFor: #channelResume:!audio channel!public! !
+!HGE categoriesFor: #channelResumeAll!audio channel!public! !
+!HGE categoriesFor: #channelSetPanning:pan:!audio channel!public! !
+!HGE categoriesFor: #channelSetPitch:pitch:!audio channel!public! !
+!HGE categoriesFor: #channelSetPos:fSeconds:!audio channel!public! !
+!HGE categoriesFor: #channelSetVolume:volume:!audio channel!public! !
+!HGE categoriesFor: #channelSlideTo:time:volume:pan:pitch:!audio channel!public! !
+!HGE categoriesFor: #channelStop:!audio channel!public! !
+!HGE categoriesFor: #channelStopAll!audio channel!public! !
 !HGE categoriesFor: #effectFree:!public!sound effect! !
 !HGE categoriesFor: #effectLoad:!public!sound effect! !
 !HGE categoriesFor: #effectLoad:size:!public!sound effect! !
