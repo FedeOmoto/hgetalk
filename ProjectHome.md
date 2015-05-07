@@ -1,0 +1,2 @@
+HGETalk provides a series of Dolphin Smalltalk wrappers and bindings for the [HGE](http://hge.relishgames.com) hardware accelerated 2D game engine.
+Eventually, with all the wrappers and bindings in place, it will provide a real, fully featured 2D game engine "a la Smalltalk".
